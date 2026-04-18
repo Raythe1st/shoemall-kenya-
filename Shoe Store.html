@@ -1,0 +1,1922 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeMall Kenya - Kenya's Premier Shoe Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FF6B00',
+                            dark: '#1a1a1a',
+                            light: '#f5f5f5',
+                            accent: '#00A650',
+                            whatsapp: '#25D366',
+                            mpesa: '#00A650'
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'bounce-slight': 'bounceSlight 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+                    },
+                    keyframes: {
+                        slideIn: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceSlight: {
+                            '0%, 100%': { transform: 'translateY(-5%)' },
+                            '50%': { transform: 'translateY(0)' },
+                        },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        .cart-sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #FF6B00 #f1f1f1;
+        }
+        .cart-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .cart-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .cart-sidebar::-webkit-scrollbar-thumb {
+            background: #FF6B00;
+            border-radius: 3px;
+        }
+        .location-dropdown {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 40;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 40;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-panel.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .auth-modal {
+            backdrop-filter: blur(5px);
+        }
+        .mpesa-gradient {
+            background: linear-gradient(135deg, #00A650 0%, #007A3D 100%);
+        }
+        .otp-input {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin: 0 0.25rem;
+            transition: all 0.2s;
+        }
+        .otp-input:focus {
+            border-color: #FF6B00;
+            outline: none;
+            transform: scale(1.05);
+        }
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        .cart-item.removing {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        .size-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+        .quantity-btn {
+            transition: all 0.2s;
+        }
+        .quantity-btn:active {
+            transform: scale(0.9);
+        }
+        .add-to-cart-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .add-to-cart-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .add-to-cart-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+
+    <!-- Top Bar -->
+    <div class="bg-brand-dark text-white text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><i class="fas fa-phone-alt text-brand-orange"></i> 0748352093</span>
+                <span class="hidden sm:inline">|</span>
+                <span class="hidden sm:flex items-center gap-1"><i class="fas fa-envelope text-brand-orange"></i> support@shoemall.co.ke</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><i class="fas fa-truck text-brand-orange"></i> Free Delivery in Nairobi</span>
+                <span class="hidden sm:inline">|</span>
+                <button onclick="openLocationModal()" class="flex items-center gap-1 hover:text-brand-orange transition-colors">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="current-location">Select Location</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center text-white text-xl font-bold transform group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-brand-dark leading-none">ShoeMall</h1>
+                        <span class="text-xs text-brand-orange font-semibold">KENYA</span>
+                    </div>
+                </a>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="search-input" placeholder="Search for shoes, brands, sizes..." 
+                            class="w-full pl-4 pr-12 py-3 border-2 border-gray-200 rounded-full focus:border-brand-orange focus:outline-none transition-colors"
+                            onkeyup="handleSearch(event)">
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-brand-orange text-white rounded-full hover:bg-orange-600 transition-colors flex items-center justify-center">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4">
+                    <button onclick="openAuthModal('login')" class="hidden md:flex flex-col items-center text-gray-600 hover:text-brand-orange transition-colors" id="auth-btn">
+                        <i class="fas fa-user text-xl"></i>
+                        <span class="text-xs mt-1">Account</span>
+                    </button>
+                    <div id="user-menu" class="hidden relative">
+                        <button onclick="toggleUserMenu()" class="flex items-center gap-2 text-gray-700 hover:text-brand-orange">
+                            <div id="user-initial" class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-sm"></div>
+                            <span id="user-name" class="text-sm font-medium hidden md:block"></span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border hidden py-2 z-50">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm"><i class="fas fa-user mr-2"></i>Profile</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm"><i class="fas fa-box mr-2"></i>My Orders</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm"><i class="fas fa-heart mr-2"></i>Wishlist</a>
+                            <hr class="my-2">
+                            <button onclick="logout()" class="block w-full text-left px-4 py-2 hover:bg-gray-50 text-sm text-red-600"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+                        </div>
+                    </div>
+                    <button class="hidden md:flex flex-col items-center text-gray-600 hover:text-brand-orange transition-colors relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span class="text-xs mt-1">Saved</span>
+                    </button>
+                    <button onclick="toggleCart()" class="flex flex-col items-center text-gray-600 hover:text-brand-orange transition-colors relative group">
+                        <div class="relative">
+                            <i class="fas fa-shopping-cart text-xl group-hover:animate-bounce"></i>
+                            <span id="cart-count" class="absolute -top-2 -right-2 w-5 h-5 bg-brand-orange text-white text-xs rounded-full flex items-center justify-center font-bold hidden animate-pulse">0</span>
+                        </div>
+                        <span class="text-xs mt-1">Cart</span>
+                    </button>
+                    <button class="md:hidden text-2xl text-gray-600" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="md:hidden mt-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search shoes..." 
+                        class="w-full pl-4 pr-12 py-2 border-2 border-gray-200 rounded-full focus:border-brand-orange focus:outline-none"
+                        onkeyup="handleSearch(event)">
+                    <button class="absolute right-2 top-1/2 -translate-y-1/2 text-brand-orange">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="border-t border-gray-100 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4">
+                <ul class="flex items-center gap-8 py-3 text-sm font-medium text-gray-700 overflow-x-auto">
+                    <li><button onclick="filterByCategory('all')" class="hover:text-brand-orange transition-colors whitespace-nowrap flex items-center gap-2"><i class="fas fa-th-large"></i> All Categories</button></li>
+                    <li><button onclick="filterByCategory('men')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Men's Shoes</button></li>
+                    <li><button onclick="filterByCategory('women')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Women's Shoes</button></li>
+                    <li><button onclick="filterByCategory('kids')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Kids' Shoes</button></li>
+                    <li><button onclick="filterByCategory('sports')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Sports & Running</button></li>
+                    <li><button onclick="filterByCategory('formal')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Formal & Office</button></li>
+                    <li><button onclick="filterByCategory('casual')" class="hover:text-brand-orange transition-colors whitespace-nowrap">Casual & Sneakers</button></li>
+                    <li class="ml-auto"><span class="text-brand-orange font-bold animate-pulse">Flash Sale!</span></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" onclick="toggleMobileMenu()">
+        <div class="absolute left-0 top-0 h-full w-80 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300" id="mobile-menu-content" onclick="event.stopPropagation()">
+            <div class="p-4 border-b flex justify-between items-center bg-brand-orange text-white">
+                <h2 class="font-bold text-lg">Menu</h2>
+                <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-4 space-y-4">
+                <button onclick="filterByCategory('all'); toggleMobileMenu()" class="block w-full text-left py-2 border-b">All Categories</button>
+                <button onclick="filterByCategory('men'); toggleMobileMenu()" class="block w-full text-left py-2 border-b">Men's Shoes</button>
+                <button onclick="filterByCategory('women'); toggleMobileMenu()" class="block w-full text-left py-2 border-b">Women's Shoes</button>
+                <button onclick="filterByCategory('kids'); toggleMobileMenu()" class="block w-full text-left py-2 border-b">Kids' Shoes</button>
+                <button onclick="openLocationModal()" class="block w-full text-left py-2 text-brand-orange font-semibold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>Change Location
+                </button>
+                <button onclick="openAuthModal('login'); toggleMobileMenu()" class="block w-full text-left py-2 text-brand-orange font-semibold">
+                    <i class="fas fa-user mr-2"></i>Sign In / Register
+                </button>
+                <a href="https://wa.me/254748352093" target="_blank" class="block w-full text-left py-2 text-brand-whatsapp font-semibold">
+                    <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-brand-dark to-gray-900 text-white overflow-hidden">
+        <div class="hero-pattern absolute inset-0 opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 py-12 md:py-20 relative z-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6 animate-fade-in">
+                    <div class="inline-block bg-brand-orange text-white px-4 py-1 rounded-full text-sm font-semibold mb-2">
+                        <i class="fas fa-fire mr-2"></i>Hot Deals at RNG Plaza
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-bold leading-tight">
+                        Step Into <span class="gradient-text">Style</span><br>
+                        With Kenyan Flavor
+                    </h2>
+                    <p class="text-gray-300 text-lg max-w-lg">
+                        Discover premium footwear delivered to your doorstep. Visit us at RNG Plaza, Ronald Ngala Street, Nairobi or order online for delivery across Kenya.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="scrollToProducts()" class="bg-brand-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-orange-500/50">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        <button onclick="openAuthModal('signup')" class="border-2 border-white hover:bg-white hover:text-brand-dark text-white px-8 py-4 rounded-full font-bold text-lg transition-all">
+                            Create Account
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-6 pt-4 text-sm text-gray-400">
+                        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-accent"></i> Authentic Products</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-accent"></i> M-Pesa Accepted</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-accent"></i> Same Day Delivery</span>
+                    </div>
+                </div>
+                <div class="relative hidden md:block">
+                    <div class="absolute inset-0 bg-brand-orange rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop" alt="Featured Shoe" class="relative z-10 w-full max-w-md mx-auto transform hover:rotate-6 transition-transform duration-500 drop-shadow-2xl animate-bounce-slight">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-brand-orange text-xl">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">Fast Delivery</h3>
+                        <p class="text-xs text-gray-500">1-3 days nationwide</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-brand-mpesa text-xl">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">M-Pesa STK Push</h3>
+                        <p class="text-xs text-gray-500">Pay via Safaricom</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">Easy Returns</h3>
+                        <p class="text-xs text-gray-500">7-day return policy</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer" onclick="toggleWhatsApp()">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-brand-whatsapp text-xl animate-pulse-slow">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">WhatsApp Order</h3>
+                        <p class="text-xs text-gray-500">0748352093</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8" id="products-section">
+        
+        <!-- Filters & Sort -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800" id="category-title">All Shoes</h2>
+                <p class="text-gray-500 text-sm mt-1">Showing <span id="showing-count">0</span> products</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 w-full md:w-auto">
+                <select id="sort-select" onchange="sortProducts()" class="px-4 py-2 border border-gray-300 rounded-lg focus:border-brand-orange focus:outline-none text-sm cursor-pointer hover:border-brand-orange transition-colors">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="newest">Newest Arrivals</option>
+                </select>
+                
+                <select id="size-filter" onchange="filterBySize()" class="px-4 py-2 border border-gray-300 rounded-lg focus:border-brand-orange focus:outline-none text-sm cursor-pointer hover:border-brand-orange transition-colors">
+                    <option value="all">All Sizes</option>
+                    <option value="38">Size 38</option>
+                    <option value="39">Size 39</option>
+                    <option value="40">Size 40</option>
+                    <option value="41">Size 41</option>
+                    <option value="42">Size 42</option>
+                    <option value="43">Size 43</option>
+                    <option value="44">Size 44</option>
+                    <option value="45">Size 45</option>
+                </select>
+
+                <div class="flex gap-2">
+                    <button onclick="setView('grid')" class="p-2 border rounded-lg hover:border-brand-orange transition-colors bg-brand-orange text-white" id="grid-view">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button onclick="setView('list')" class="p-2 border rounded-lg hover:border-brand-orange transition-colors" id="list-view">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <!-- Products injected by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="text-6xl text-gray-300 mb-4"><i class="fas fa-search"></i></div>
+            <h3 class="text-xl font-bold text-gray-600 mb-2">No products found</h3>
+            <p class="text-gray-500">Try adjusting your filters or search query</p>
+            <button onclick="resetFilters()" class="mt-4 text-brand-orange font-semibold hover:underline">Clear all filters</button>
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-12">
+            <button onclick="loadMore()" class="px-8 py-3 border-2 border-brand-orange text-brand-orange font-bold rounded-full hover:bg-brand-orange hover:text-white transition-all transform hover:scale-105">
+                Load More Products
+            </button>
+        </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="bg-brand-dark text-white py-16 mt-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+            <p class="text-gray-400 mb-8">Get exclusive deals and updates on new arrivals delivered to your inbox</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto" onsubmit="event.preventDefault(); showToast('Thank you for subscribing!');">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-orange" required>
+                <button type="submit" class="px-8 py-3 bg-brand-orange text-white font-bold rounded-full hover:bg-orange-600 transition-colors transform hover:scale-105">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-brand-orange rounded flex items-center justify-center text-white">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">ShoeMall Kenya</span>
+                </div>
+                <p class="text-sm text-gray-400 mb-4">Kenya's premier online destination for quality footwear. Visit our store at RNG Plaza, Ronald Ngala Street, Nairobi.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-brand-orange transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-brand-orange transition-colors"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-brand-orange transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/254748352093" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-brand-whatsapp transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-white font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">FAQs</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white font-bold mb-4">Customer Service</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Shipping Info</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Returns & Exchanges</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Track Order</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors">Payment Methods</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt text-brand-orange mt-1"></i>
+                        <span>RNG Plaza<br>Along Ronald Ngala Street<br>Nairobi, Kenya</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone text-brand-orange"></i>
+                        <span>0748352093</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fab fa-whatsapp text-brand-whatsapp"></i>
+                        <a href="https://wa.me/254748352093" target="_blank" class="hover:text-brand-whatsapp transition-colors">WhatsApp Chat</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-brand-orange"></i>
+                        <span>support@shoemall.co.ke</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+            <p>&copy; 2024 ShoeMall Kenya. All rights reserved. | RNG Plaza, Nairobi</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden transition-opacity duration-300" onclick="toggleCart()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 cart-sidebar overflow-hidden flex flex-col" id="cart-content" onclick="event.stopPropagation()">
+            <!-- Cart Header -->
+            <div class="p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10 shadow-sm">
+                <div>
+                    <h2 class="font-bold text-lg flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-brand-orange"></i>
+                        Your Cart
+                    </h2>
+                    <p class="text-sm text-gray-500" id="cart-item-count">0 items</p>
+                </div>
+                <button onclick="toggleCart()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Cart Items Container -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Cart items injected here -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="cart-empty" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center">
+                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center text-gray-300 text-4xl mb-4">
+                    <i class="fas fa-shopping-basket"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-600 mb-2">Your cart is empty</h3>
+                <p class="text-gray-500 mb-6">Looks like you haven't added any shoes yet.</p>
+                <button onclick="toggleCart(); scrollToProducts();" class="px-8 py-3 bg-brand-orange text-white rounded-full font-bold hover:bg-orange-600 transition-colors">
+                    Start Shopping
+                </button>
+            </div>
+            
+            <!-- Cart Footer -->
+            <div id="cart-footer" class="border-t bg-gray-50 p-4 space-y-4 hidden">
+                <!-- Promo Code -->
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Promo code" class="flex-1 px-4 py-2 border rounded-lg text-sm focus:border-brand-orange focus:outline-none">
+                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-semibold hover:bg-gray-300 transition-colors">Apply</button>
+                </div>
+                
+                <!-- Price Breakdown -->
+                <div class="space-y-2 bg-white p-4 rounded-lg">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Subtotal</span>
+                        <span class="font-semibold" id="cart-subtotal">KSh 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Delivery</span>
+                        <span class="font-semibold text-brand-accent" id="delivery-fee">KSh 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-green-600 hidden" id="discount-row">
+                        <span>Discount</span>
+                        <span class="font-semibold" id="discount-amount">-KSh 0</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold border-t pt-2 mt-2">
+                        <span>Total</span>
+                        <span class="text-brand-orange" id="cart-total">KSh 0</span>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <button onclick="proceedToCheckout()" class="w-full bg-brand-orange text-white py-4 rounded-lg font-bold text-lg hover:bg-orange-600 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                    Checkout <i class="fas fa-arrow-right"></i>
+                </button>
+                <button onclick="orderViaWhatsApp()" class="w-full bg-brand-whatsapp text-white py-3 rounded-lg font-bold hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                </button>
+                <button onclick="toggleCart(); scrollToProducts();" class="w-full py-2 text-gray-500 text-sm hover:text-brand-orange transition-colors">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Modal -->
+    <div id="location-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[80vh] overflow-hidden shadow-2xl animate-fade-in">
+            <div class="p-6 border-b bg-gradient-to-r from-brand-orange to-orange-500 text-white">
+                <h2 class="text-2xl font-bold mb-1">Select Delivery Location</h2>
+                <p class="text-orange-100 text-sm">Choose where you want your shoes delivered</p>
+            </div>
+            
+            <div class="p-4">
+                <div class="relative mb-4">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="location-search" placeholder="Search location..." 
+                        class="w-full pl-10 pr-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none"
+                        onkeyup="filterLocations()">
+                </div>
+                
+                <div class="location-dropdown space-y-1" id="location-list">
+                    <!-- Locations injected here -->
+                </div>
+            </div>
+            
+            <div class="p-4 border-t bg-gray-50">
+                <button onclick="closeLocationModal()" class="w-full py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-600 hover:border-brand-orange hover:text-brand-orange transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in relative" onclick="event.stopPropagation()">
+            <div class="grid md:grid-cols-2 gap-6 p-6" id="quick-view-content">
+                <!-- Content injected here -->
+            </div>
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden auth-modal flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-brand-orange rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800" id="auth-title">Welcome Back</h2>
+                    <p class="text-gray-500 text-sm mt-2" id="auth-subtitle">Sign in to your account to continue</p>
+                </div>
+
+                <div class="flex mb-6 border-b">
+                    <button onclick="switchAuthTab('email')" class="flex-1 pb-3 text-center font-medium border-b-2 border-brand-orange text-brand-orange transition-colors" id="tab-email">Email</button>
+                    <button onclick="switchAuthTab('phone')" class="flex-1 pb-3 text-center font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors" id="tab-phone">Phone</button>
+                </div>
+
+                <!-- Email Auth Form -->
+                <div id="email-auth-form" class="space-y-4">
+                    <div id="signup-fields" class="hidden space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="auth-name" class="w-full px-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none transition-colors" placeholder="John Doe">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="auth-email" class="w-full px-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none transition-colors" placeholder="you@example.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="auth-password" class="w-full px-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none transition-colors" placeholder="••••••••">
+                            <button onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i class="fas fa-eye" id="password-toggle"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="forgot-password-link" class="text-right">
+                        <button onclick="showForgotPassword()" class="text-sm text-brand-orange hover:underline">Forgot password?</button>
+                    </div>
+
+                    <button onclick="handleEmailAuth()" class="w-full bg-brand-orange text-white py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors transform hover:scale-[1.02]" id="email-auth-btn">
+                        Sign In
+                    </button>
+                </div>
+
+                <!-- Phone Auth Form -->
+                <div id="phone-auth-form" class="hidden space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <div class="flex gap-2">
+                            <span class="px-4 py-3 bg-gray-100 border rounded-lg text-gray-600 font-medium">+254</span>
+                            <input type="tel" id="auth-phone" class="flex-1 px-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none transition-colors" placeholder="712345678" maxlength="9">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Enter your Safaricom number for M-Pesa</p>
+                    </div>
+
+                    <div id="otp-section" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Enter OTP</label>
+                        <div class="flex justify-center gap-2 mb-2">
+                            <input type="text" class="otp-input" maxlength="1" onkeyup="handleOtpInput(this, 0)">
+                            <input type="text" class="otp-input" maxlength="1" onkeyup="handleOtpInput(this, 1)">
+                            <input type="text" class="otp-input" maxlength="1" onkeyup="handleOtpInput(this, 2)">
+                            <input type="text" class="otp-input" maxlength="1" onkeyup="handleOtpInput(this, 3)">
+                        </div>
+                        <p class="text-xs text-center text-gray-500">Didn't receive? <button onclick="sendOTP()" class="text-brand-orange hover:underline font-medium">Resend</button></p>
+                    </div>
+
+                    <button onclick="handlePhoneAuth()" class="w-full bg-brand-orange text-white py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors transform hover:scale-[1.02]" id="phone-auth-btn">
+                        Send OTP
+                    </button>
+                </div>
+
+                <!-- Google Auth -->
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="handleGoogleAuth()" class="w-full mt-4 flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors hover:border-gray-300">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                        Google
+                    </button>
+                </div>
+
+                <!-- Auth Switch -->
+                <div class="mt-6 text-center text-sm text-gray-600">
+                    <span id="auth-switch-text">Don't have an account?</span>
+                    <button onclick="toggleAuthMode()" class="text-brand-orange font-semibold hover:underline ml-1" id="auth-switch-btn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl animate-fade-in relative p-8">
+            <button onclick="closeForgotPassword()" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                    <i class="fas fa-lock-open"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Reset Password</h2>
+                <p class="text-gray-500 text-sm mt-2">Enter your email to receive reset instructions</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" id="reset-email" class="w-full px-4 py-3 border rounded-lg focus:border-brand-orange focus:outline-none transition-colors" placeholder="you@example.com">
+                </div>
+                
+                <button onclick="handlePasswordReset()" class="w-full bg-brand-orange text-white py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors transform hover:scale-[1.02]">
+                    Send Reset Link
+                </button>
+                
+                <button onclick="closeForgotPassword()" class="w-full py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-600 hover:border-brand-orange hover:text-brand-orange transition-colors">
+                    Back to Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- M-Pesa Checkout Modal -->
+    <div id="mpesa-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl animate-fade-in relative overflow-hidden">
+            <div class="mpesa-gradient p-6 text-white text-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
+                <button onclick="closeMpesaModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white hover:bg-opacity-30 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="text-4xl mb-2"><i class="fas fa-mobile-alt"></i></div>
+                <h2 class="text-2xl font-bold">M-Pesa Payment</h2>
+                <p class="text-green-100 text-sm">Enter your Safaricom number</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Amount to Pay</span>
+                        <span class="text-2xl font-bold text-brand-mpesa" id="mpesa-amount">KSh 0</span>
+                    </div>
+                    <div class="text-xs text-gray-500 flex items-center gap-1">
+                        <i class="fas fa-shield-alt"></i> Secure payment via Safaricom M-Pesa
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">M-Pesa Number</label>
+                    <div class="flex gap-2">
+                        <span class="px-4 py-3 bg-gray-100 border rounded-lg text-gray-600 font-medium">+254</span>
+                        <input type="tel" id="mpesa-phone" class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-brand-mpesa focus:outline-none text-lg font-semibold transition-colors" placeholder="712345678" maxlength="9">
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-info-circle"></i>
+                        You'll receive an STK push on your phone
+                    </p>
+                </div>
+
+                <div id="mpesa-processing" class="hidden text-center py-4">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-mpesa mx-auto mb-4"></div>
+                    <p class="text-gray-600 font-medium">Sending STK push...</p>
+                    <p class="text-sm text-gray-500 mt-1">Please check your phone and enter M-Pesa PIN</p>
+                </div>
+
+                <div id="mpesa-actions" class="space-y-3">
+                    <button onclick="processMpesaPayment()" class="w-full mpesa-gradient text-white py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                        <i class="fas fa-mobile-alt"></i>
+                        Pay with M-Pesa
+                    </button>
+                    <button onclick="closeMpesaModal()" class="w-full py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-600 hover:border-gray-400 transition-colors">
+                        Cancel
+                    </button>
+                </div>
+
+                <div class="text-center text-xs text-gray-400">
+                    <p>By proceeding, you agree to M-Pesa terms and conditions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div id="payment-success-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl animate-fade-in p-8 text-center">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-4xl mx-auto mb-4 animate-bounce">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Payment Successful!</h2>
+            <p class="text-gray-600 mb-6">Your order has been placed successfully. You will receive a confirmation SMS shortly.</p>
+            <div class="bg-gray-50 p-4 rounded-lg mb-6 text-left">
+                <p class="text-sm text-gray-600 mb-1">Transaction ID: <span class="font-mono font-bold" id="transaction-id">MPESA123456</span></p>
+                <p class="text-sm text-gray-600">Amount Paid: <span class="font-bold" id="paid-amount">KSh 0</span></p>
+            </div>
+            <button onclick="closePaymentSuccess()" class="w-full bg-brand-orange text-white py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors transform hover:scale-[1.02]">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- WhatsApp Panel -->
+    <div id="whatsapp-panel" class="whatsapp-panel bg-white rounded-2xl shadow-2xl p-4 w-80 border border-gray-100">
+        <div class="flex items-center gap-3 mb-4 pb-3 border-b">
+            <div class="w-12 h-12 bg-brand-whatsapp rounded-full flex items-center justify-center text-white text-2xl">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800">ShoeMall Kenya</h3>
+                <p class="text-xs text-green-600 flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Online Now
+                </p>
+            </div>
+        </div>
+        <div class="space-y-3 mb-4">
+            <p class="text-sm text-gray-600">Hi! How can we help you today?</p>
+            <div class="bg-gray-50 p-3 rounded-lg text-sm text-gray-700">
+                <i class="fas fa-check-circle text-brand-whatsapp mr-2"></i>
+                Quick replies available
+            </div>
+        </div>
+        <div class="space-y-2">
+            <a href="https://wa.me/254748352093?text=Hi%20ShoeMall%2C%20I%20want%20to%20place%20an%20order" target="_blank" class="block w-full bg-brand-whatsapp text-white py-3 rounded-lg font-semibold text-center hover:bg-green-600 transition-colors flex items-center justify-center gap-2 transform hover:scale-[1.02]">
+                <i class="fab fa-whatsapp"></i> Start Chat
+            </a>
+            <button onclick="toggleWhatsApp()" class="block w-full border border-gray-300 text-gray-600 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm">
+                Close
+            </button>
+        </div>
+        <div class="mt-3 pt-3 border-t text-xs text-gray-500 text-center">
+            Typically replies in 5 minutes
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <button onclick="toggleWhatsApp()" class="whatsapp-float w-16 h-16 bg-brand-whatsapp rounded-full shadow-2xl flex items-center justify-center text-white text-3xl hover:shadow-green-500/50 transform hover:scale-110 transition-all">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-24 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3 max-w-sm">
+        <i class="fas fa-check-circle text-brand-accent text-xl"></i>
+        <span id="toast-message">Operation successful</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // DATA
+        // ==========================================
+        
+        const products = [
+            { id: 1, name: "Nike Air Max 270", category: "sports", price: 8500, oldPrice: 12000, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", rating: 4.8, reviews: 234, sizes: [40, 41, 42, 43, 44], badge: "Best Seller" },
+            { id: 2, name: "Adidas Ultraboost 22", category: "sports", price: 9500, oldPrice: 14000, image: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400&h=400&fit=crop", rating: 4.9, reviews: 189, sizes: [40, 41, 42, 43, 44, 45], badge: "New" },
+            { id: 3, name: "Classic Leather Oxford", category: "formal", price: 4500, oldPrice: 6500, image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=400&h=400&fit=crop", rating: 4.6, reviews: 89, sizes: [39, 40, 41, 42, 43], badge: null },
+            { id: 4, name: "Puma RS-X Bold", category: "casual", price: 7200, oldPrice: 9500, image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop", rating: 4.7, reviews: 156, sizes: [38, 39, 40, 41, 42], badge: "Sale" },
+            { id: 5, name: "Vans Old Skool", category: "casual", price: 4800, oldPrice: 6500, image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop", rating: 4.5, reviews: 312, sizes: [38, 39, 40, 41, 42, 43], badge: null },
+            { id: 6, name: "New Balance 574", category: "casual", price: 7800, oldPrice: 10000, image: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=400&fit=crop", rating: 4.8, reviews: 201, sizes: [40, 41, 42, 43, 44], badge: "Popular" },
+            { id: 7, name: "Timberland Premium Boots", category: "men", price: 12500, oldPrice: 18000, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", rating: 4.9, reviews: 445, sizes: [40, 41, 42, 43, 44, 45], badge: "Premium" },
+            { id: 8, name: "Converse Chuck Taylor", category: "casual", price: 4200, oldPrice: 5800, image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400&h=400&fit=crop", rating: 4.6, reviews: 567, sizes: [37, 38, 39, 40, 41, 42], badge: null },
+            { id: 9, name: "Nike Air Force 1", category: "men", price: 8200, oldPrice: 11000, image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop", rating: 4.8, reviews: 892, sizes: [40, 41, 42, 43, 44], badge: "Classic" },
+            { id: 10, name: "Adidas Stan Smith", category: "women", price: 6800, oldPrice: 9000, image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&h=400&fit=crop", rating: 4.7, reviews: 334, sizes: [36, 37, 38, 39, 40, 41], badge: null },
+            { id: 11, name: "Kids Spider-Man Sneakers", category: "kids", price: 2800, oldPrice: 4000, image: "https://images.unsplash.com/photo-1514989940723-e81e6164857f?w=400&h=400&fit=crop", rating: 4.9, reviews: 123, sizes: [28, 29, 30, 31, 32, 33], badge: "Fun" },
+            { id: 12, name: "Women's Running Pro", category: "women", price: 5500, oldPrice: 7500, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop", rating: 4.5, reviews: 89, sizes: [36, 37, 38, 39, 40], badge: null },
+            { id: 13, name: "Dr. Martens 1460", category: "men", price: 14500, oldPrice: 20000, image: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=400&fit=crop", rating: 4.8, reviews: 178, sizes: [40, 41, 42, 43, 44], badge: "Premium" },
+            { id: 14, name: "Fila Disruptor II", category: "women", price: 6200, oldPrice: 8500, image: "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=400&h=400&fit=crop", rating: 4.6, reviews: 245, sizes: [36, 37, 38, 39, 40], badge: "Trending" },
+            { id: 15, name: "Sketchers Go Walk", category: "sports", price: 5800, oldPrice: 7800, image: "https://images.unsplash.com/photo-1562183241-b937e95585b6?w=400&h=400&fit=crop", rating: 4.7, reviews: 156, sizes: [39, 40, 41, 42, 43], badge: null },
+            { id: 16, name: "Jordan 1 Mid", category: "men", price: 11000, oldPrice: 15000, image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&h=400&fit=crop", rating: 4.9, reviews: 423, sizes: [40, 41, 42, 43, 44, 45], badge: "Hot" }
+        ];
+
+        const kenyanLocations = [
+            "RNG Plaza, Nairobi (Pickup)",
+            "Nairobi - CBD", "Nairobi - Westlands", "Nairobi - Karen", "Nairobi - Lavington",
+            "Nairobi - Kilimani", "Nairobi - Eastleigh", "Nairobi - Ngong Road", "Nairobi - Thika Road",
+            "Nairobi - Embakasi", "Nairobi - South B/C", "Nairobi - Kasarani",
+            "Mombasa - CBD", "Mombasa - Nyali", "Mombasa - Bamburi", "Mombasa - Shanzu",
+            "Kisumu - CBD", "Kisumu - Milimani", "Nakuru - CBD", "Nakuru - London",
+            "Eldoret - CBD", "Thika - CBD", "Machakos - CBD", "Kiambu - CBD",
+            "Kikuyu", "Ruiru", "Juja", "Limuru", "Kajiado", "Ngong", "Rongai"
+        ];
+
+        // ==========================================
+        // STATE
+        // ==========================================
+        
+        let cart = [];
+        let currentCategory = 'all';
+        let currentLocation = null;
+        let viewMode = 'grid';
+        let currentUser = null;
+        let authMode = 'login';
+        let authMethod = 'email';
+        let otpSent = false;
+        let selectedQuickViewSize = null;
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load cart from localStorage
+            const savedCart = localStorage.getItem('shoemall_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+            
+            // Load location from localStorage
+            const savedLocation = localStorage.getItem('deliveryLocation');
+            if (savedLocation) {
+                currentLocation = savedLocation;
+                document.getElementById('current-location').textContent = savedLocation;
+            }
+            
+            // Load user from localStorage
+            const savedUser = localStorage.getItem('shoemall_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateAuthUI();
+            }
+            
+            renderProducts();
+            renderLocations();
+            updateCartUI();
+        });
+
+        // ==========================================
+        // CART FUNCTIONS - FIXED AND ENHANCED
+        // ==========================================
+        
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const sizeSelect = document.getElementById(`size-${productId}`);
+            const size = sizeSelect ? sizeSelect.value : '';
+            
+            if (!size) {
+                showToast('Please select a size first', 'error');
+                // Shake animation on select
+                sizeSelect.classList.add('animate-shake');
+                setTimeout(() => sizeSelect.classList.remove('animate-shake'), 500);
+                sizeSelect.focus();
+                return;
+            }
+            
+            const existingItem = cart.find(item => item.id === productId && item.size === size);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+                showToast(`Increased quantity of ${product.name} (Size ${size})`, 'success');
+            } else {
+                cart.push({ 
+                    ...product, 
+                    size: size, 
+                    quantity: 1, 
+                    cartId: Date.now() + Math.random() 
+                });
+                showToast(`${product.name} (Size ${size}) added to cart!`, 'success');
+            }
+            
+            saveCart();
+            updateCartUI();
+            animateCartIcon();
+        }
+
+        function removeFromCart(cartId) {
+            const itemElement = document.querySelector(`[data-cart-id="${cartId}"]`);
+            if (itemElement) {
+                itemElement.classList.add('removing');
+                setTimeout(() => {
+                    cart = cart.filter(item => item.cartId !== cartId);
+                    saveCart();
+                    updateCartUI();
+                    showToast('Item removed from cart', 'success');
+                }, 300);
+            }
+        }
+
+        function updateQuantity(cartId, change) {
+            const item = cart.find(item => item.cartId === cartId);
+            if (!item) return;
+            
+            const newQuantity = item.quantity + change;
+            
+            if (newQuantity <= 0) {
+                // Confirm before removing
+                if (confirm('Remove this item from cart?')) {
+                    removeFromCart(cartId);
+                }
+                return;
+            }
+            
+            item.quantity = newQuantity;
+            saveCart();
+            updateCartUI();
+            
+            // Visual feedback
+            const qtyElement = document.querySelector(`[data-cart-id="${cartId}"] .qty-display`);
+            if (qtyElement) {
+                qtyElement.classList.add('scale-125');
+                setTimeout(() => qtyElement.classList.remove('scale-125'), 200);
+            }
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartEmpty = document.getElementById('cart-empty');
+            const cartFooter = document.getElementById('cart-footer');
+            const itemCountText = document.getElementById('cart-item-count');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Update cart count badge
+            if (totalItems > 0) {
+                cartCount.textContent = totalItems;
+                cartCount.classList.remove('hidden');
+                itemCountText.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+            } else {
+                cartCount.classList.add('hidden');
+                itemCountText.textContent = '0 items';
+            }
+            
+            // Show/hide empty state and footer
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '';
+                cartEmpty.classList.remove('hidden');
+                cartFooter.classList.add('hidden');
+                return;
+            }
+            
+            cartEmpty.classList.add('hidden');
+            cartFooter.classList.remove('hidden');
+            
+            // Calculate delivery fee
+            let deliveryFee = 0;
+            if (!currentLocation || !currentLocation.includes('RNG Plaza')) {
+                if (currentLocation && currentLocation.includes('Nairobi')) {
+                    deliveryFee = subtotal > 5000 ? 0 : 300;
+                } else if (currentLocation) {
+                    deliveryFee = 500;
+                } else {
+                    deliveryFee = 0; // Will be calculated at checkout
+                }
+            }
+            
+            // Render cart items
+            cartItemsContainer.innerHTML = cart.map((item, index) => `
+                <div class="cart-item bg-gray-50 p-4 rounded-lg flex gap-4" data-cart-id="${item.cartId}" style="animation-delay: ${index * 0.05}s">
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg border border-gray-200">
+                    
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-semibold text-gray-800 text-sm line-clamp-2 pr-2">${item.name}</h4>
+                            <button onclick="removeFromCart(${item.cartId})" class="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded" title="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <p class="text-xs text-gray-500 mb-2">Size: EU ${item.size} | ${item.category}</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-brand-orange">KSh ${(item.price * item.quantity).toLocaleString()}</span>
+                            
+                            <div class="flex items-center gap-1 bg-white rounded-lg border shadow-sm">
+                                <button onclick="updateQuantity(${item.cartId}, -1)" class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 rounded-l-lg" title="Decrease quantity">
+                                    <i class="fas fa-minus text-xs"></i>
+                                </button>
+                                <span class="qty-display w-8 text-center text-sm font-semibold transition-transform">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.cartId}, 1)" class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 rounded-r-lg" title="Increase quantity">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        ${item.quantity > 1 ? `<p class="text-xs text-gray-400 mt-1">KSh ${item.price.toLocaleString()} each</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update totals
+            document.getElementById('cart-subtotal').textContent = `KSh ${subtotal.toLocaleString()}`;
+            document.getElementById('delivery-fee').textContent = deliveryFee === 0 ? 'FREE' : `KSh ${deliveryFee.toLocaleString()}`;
+            document.getElementById('cart-total').textContent = `KSh ${(subtotal + deliveryFee).toLocaleString()}`;
+        }
+
+        function saveCart() {
+            localStorage.setItem('shoemall_cart', JSON.stringify(cart));
+        }
+
+        function animateCartIcon() {
+            const cartBtn = document.querySelector('.fa-shopping-cart').closest('button');
+            cartBtn.classList.add('animate-shake');
+            setTimeout(() => cartBtn.classList.remove('animate-shake'), 500);
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const content = document.getElementById('cart-content');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    content.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    sidebar.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        }
+
+        // ==========================================
+        // PRODUCT FUNCTIONS
+        // ==========================================
+        
+        function renderProducts(productsToRender = products) {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
+            const showingCount = document.getElementById('showing-count');
+            
+            showingCount.textContent = productsToRender.length;
+            
+            if (productsToRender.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            grid.innerHTML = productsToRender.map(product => `
+                <div class="product-card bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group ${viewMode === 'list' ? 'flex flex-row' : ''}">
+                    <div class="relative overflow-hidden ${viewMode === 'list' ? 'w-48 flex-shrink-0' : ''}">
+                        <img src="${product.image}" alt="${product.name}" class="product-image w-full ${viewMode === 'list' ? 'h-full object-cover' : 'h-64'} object-cover transition-transform duration-500">
+                        ${product.badge ? `<span class="absolute top-2 left-2 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">${product.badge}</span>` : ''}
+                        <button onclick="quickView(${product.id})" class="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 opacity-0 group-hover:opacity-100 transition-all hover:bg-brand-orange hover:text-white transform hover:scale-110">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all"></div>
+                    </div>
+                    
+                    <div class="p-4 ${viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : ''}">
+                        <div>
+                            <div class="flex items-center gap-1 mb-1">
+                                <div class="flex text-yellow-400 text-xs">
+                                    ${Array(5).fill(0).map((_, i) => `<i class="${i < Math.floor(product.rating) ? 'fas' : (i < product.rating ? 'fas fa-star-half-alt' : 'far')} fa-star"></i>`).join('')}
+                                </div>
+                                <span class="text-xs text-gray-500">(${product.reviews})</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-800 mb-1 line-clamp-2 hover:text-brand-orange cursor-pointer transition-colors" onclick="quickView(${product.id})">${product.name}</h3>
+                            <p class="text-xs text-gray-500 mb-2 capitalize">${product.category}</p>
+                        </div>
+                        
+                        <div class="${viewMode === 'list' ? 'flex items-center justify-between mt-4 gap-4' : ''}">
+                            <div class="mb-3">
+                                <span class="text-xl font-bold text-brand-orange">KSh ${product.price.toLocaleString()}</span>
+                                ${product.oldPrice ? `<span class="text-sm text-gray-400 line-through ml-2">KSh ${product.oldPrice.toLocaleString()}</span>` : ''}
+                            </div>
+                            
+                            <div class="flex gap-2 ${viewMode === 'list' ? 'flex-row items-center' : 'flex-col'}">
+                                <select id="size-${product.id}" class="size-select text-sm border rounded-lg px-3 py-2 focus:border-brand-orange focus:outline-none ${viewMode === 'list' ? 'w-32' : 'w-full'} bg-white">
+                                    <option value="">Select Size</option>
+                                    ${product.sizes.map(size => `<option value="${size}">EU ${size}</option>`).join('')}
+                                </select>
+                                <button onclick="addToCart(${product.id})" class="add-to-cart-btn flex-1 bg-brand-dark text-white py-2.5 rounded-lg hover:bg-brand-orange transition-colors font-semibold text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
+                                    <i class="fas fa-cart-plus"></i> ${viewMode === 'list' ? 'Add' : 'Add to Cart'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            document.getElementById('category-title').textContent = category === 'all' ? 'All Shoes' : 
+                category.charAt(0).toUpperCase() + category.slice(1) + (category === 'kids' ? "'" : "'s") + ' Shoes';
+            
+            const filtered = category === 'all' ? products : products.filter(p => 
+                p.category === category || 
+                (category === 'men' && ['formal', 'sports', 'casual'].includes(p.category) && p.sizes.some(s => s >= 40)) ||
+                (category === 'women' && ['casual', 'sports'].includes(p.category) && p.sizes.some(s => s <= 41))
+            );
+            renderProducts(filtered);
+        }
+
+        function filterBySize() {
+            const size = document.getElementById('size-filter').value;
+            let filtered = currentCategory === 'all' ? products : products.filter(p => p.category === currentCategory);
+            
+            if (size !== 'all') {
+                filtered = filtered.filter(p => p.sizes.includes(parseInt(size)));
+            }
+            renderProducts(filtered);
+        }
+
+        function handleSearch(event) {
+            const query = event.target.value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.category.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        function sortProducts() {
+            const sort = document.getElementById('sort-select').value;
+            let sorted = [...products];
+            
+            if (currentCategory !== 'all') {
+                sorted = sorted.filter(p => p.category === currentCategory);
+            }
+            
+            switch(sort) {
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'newest':
+                    sorted.sort((a, b) => b.id - a.id);
+                    break;
+            }
+            renderProducts(sorted);
+        }
+
+        function setView(mode) {
+            viewMode = mode;
+            document.getElementById('grid-view').classList.toggle('bg-brand-orange', mode === 'grid');
+            document.getElementById('grid-view').classList.toggle('text-white', mode === 'grid');
+            document.getElementById('list-view').classList.toggle('bg-brand-orange', mode === 'list');
+            document.getElementById('list-view').classList.toggle('text-white', mode === 'list');
+            renderProducts();
+        }
+
+        function resetFilters() {
+            currentCategory = 'all';
+            document.getElementById('search-input').value = '';
+            document.getElementById('size-filter').value = 'all';
+            document.getElementById('sort-select').value = 'featured';
+            document.getElementById('category-title').textContent = 'All Shoes';
+            renderProducts(products);
+        }
+
+        // ==========================================
+        // QUICK VIEW
+        // ==========================================
+        
+        function quickView(productId) {
+            const product = products.find(p => p.id === productId);
+            selectedQuickViewSize = null;
+            
+            const modal = document.getElementById('quick-view-modal');
+            const content = document.getElementById('quick-view-content');
+            
+            content.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" class="w-full rounded-xl object-cover h-96">
+                    ${product.badge ? `<span class="absolute top-4 left-4 bg-brand-orange text-white text-sm font-bold px-4 py-2 rounded-full shadow-md">${product.badge}</span>` : ''}
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">${product.name}</h2>
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="flex text-yellow-400">
+                                ${Array(5).fill(0).map((_, i) => `<i class="${i < Math.floor(product.rating) ? 'fas' : (i < product.rating ? 'fas fa-star-half-alt' : 'far')} fa-star"></i>`).join('')}
+                            </div>
+                            <span class="text-gray-500">(${product.reviews} reviews)</span>
+                        </div>
+                        <div class="flex items-baseline gap-3 mb-4">
+                            <span class="text-3xl font-bold text-brand-orange">KSh ${product.price.toLocaleString()}</span>
+                            ${product.oldPrice ? `<span class="text-xl text-gray-400 line-through">KSh ${product.oldPrice.toLocaleString()}</span>` : ''}
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Premium quality ${product.category} shoes designed for comfort and style. 
+                            Available at RNG Plaza, Nairobi or delivered to your location. 
+                            Authentic products with 7-day return policy.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold mb-2">Select Size (EU)</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${product.sizes.map(size => `
+                                <button onclick="selectQuickViewSize(${size})" class="size-btn w-12 h-12 border-2 rounded-lg font-semibold hover:border-brand-orange hover:text-brand-orange transition-all transform hover:scale-105" data-size="${size}">
+                                    ${size}
+                                </button>
+                            `).join('')}
+                        </div>
+                        <p id="size-error" class="text-red-500 text-sm mt-2 hidden">Please select a size</p>
+                    </div>
+                    
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="addToCartFromQuickView(${product.id})" class="flex-1 bg-brand-orange text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <a href="https://wa.me/254748352093?text=Hi%2C%20I'm%20interested%20in%20the%20${encodeURIComponent(product.name)}" target="_blank" class="w-14 h-12 bg-brand-whatsapp text-white rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg transform hover:scale-110">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="pt-4 border-t space-y-2 text-sm text-gray-500">
+                        <div class="flex items-center gap-2"><i class="fas fa-store text-brand-orange"></i> Available at RNG Plaza, Nairobi</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-truck text-brand-accent"></i> Free delivery in Nairobi (orders above KSh 5,000)</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-undo text-brand-accent"></i> 7-day return policy</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-shield-alt text-brand-accent"></i> 100% authentic products</div>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function selectQuickViewSize(size) {
+            selectedQuickViewSize = size;
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-orange', 'text-white', 'border-brand-orange');
+                if (parseInt(btn.dataset.size) === size) {
+                    btn.classList.add('bg-brand-orange', 'text-white', 'border-brand-orange');
+                }
+            });
+            document.getElementById('size-error').classList.add('hidden');
+        }
+
+        function addToCartFromQuickView(productId) {
+            if (!selectedQuickViewSize) {
+                document.getElementById('size-error').classList.remove('hidden');
+                // Shake animation
+                const sizeContainer = document.querySelector('.size-btn').parentElement;
+                sizeContainer.classList.add('animate-shake');
+                setTimeout(() => sizeContainer.classList.remove('animate-shake'), 500);
+                return;
+            }
+            
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId && item.size == selectedQuickViewSize);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+                showToast(`Increased quantity of ${product.name}`, 'success');
+            } else {
+                cart.push({ 
+                    ...product, 
+                    size: selectedQuickViewSize, 
+                    quantity: 1, 
+                    cartId: Date.now() + Math.random() 
+                });
+                showToast(`${product.name} added to cart!`, 'success');
+            }
+            
+            saveCart();
+            updateCartUI();
+            closeQuickView();
+            animateCartIcon();
+        }
+
+        function closeQuickView() {
+            document.getElementById('quick-view-modal').classList.add('hidden');
+            selectedQuickViewSize = null;
+        }
+
+        // ==========================================
+        // CHECKOUT & PAYMENT
+        // ==========================================
+        
+        function proceedToCheckout() {
+            if (!currentUser) {
+                toggleCart();
+                openAuthModal('login');
+                showToast('Please sign in to checkout', 'error');
+                return;
+            }
+            
+            if (!currentLocation) {
+                toggleCart();
+                openLocationModal();
+                showToast('Please select delivery location', 'error');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                showToast('Your cart is empty', 'error');
+                return;
+            }
+            
+            const total = document.getElementById('cart-total').textContent;
+            document.getElementById('mpesa-amount').textContent = total;
+            
+            if (currentUser.phone) {
+                document.getElementById('mpesa-phone').value = currentUser.phone.replace('+254', '');
+            }
+            
+            toggleCart();
+            document.getElementById('mpesa-modal').classList.remove('hidden');
+        }
+
+        function closeMpesaModal() {
+            document.getElementById('mpesa-modal').classList.add('hidden');
+            document.getElementById('mpesa-processing').classList.add('hidden');
+            document.getElementById('mpesa-actions').classList.remove('hidden');
+        }
+
+        function processMpesaPayment() {
+            const phone = document.getElementById('mpesa-phone').value;
+            
+            if (!phone || phone.length !== 9) {
+                showToast('Please enter a valid 9-digit Safaricom number', 'error');
+                document.getElementById('mpesa-phone').classList.add('animate-shake');
+                setTimeout(() => document.getElementById('mpesa-phone').classList.remove('animate-shake'), 500);
+                return;
+            }
+            
+            const validPrefixes = ['7', '1'];
+            if (!validPrefixes.includes(phone.charAt(0))) {
+                showToast('Please enter a valid Safaricom number (starting with 7 or 1)', 'error');
+                return;
+            }
+            
+            document.getElementById('mpesa-actions').classList.add('hidden');
+            document.getElementById('mpesa-processing').classList.remove('hidden');
+            
+            setTimeout(() => {
+                const transactionId = 'MPESA' + Date.now().toString().slice(-6);
+                const amount = document.getElementById('cart-total').textContent;
+                
+                document.getElementById('transaction-id').textContent = transactionId;
+                document.getElementById('paid-amount').textContent = amount;
+                
+                closeMpesaModal();
+                document.getElementById('payment-success-modal').classList.remove('hidden');
+                
+                // Clear cart
+                cart = [];
+                saveCart();
+                updateCartUI();
+                
+            }, 3000);
+        }
+
+        function closePaymentSuccess() {
+            document.getElementById('payment-success-modal').classList.add('hidden');
+        }
+
+        function orderViaWhatsApp() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty', 'error');
+                return;
+            }
+            
+            let message = "Hi ShoeMall Kenya,%0A%0AI want to place an order:%0A%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `- ${item.name} (Size: ${item.size}) x${item.quantity} - KSh ${(item.price * item.quantity).toLocaleString()}%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0ATotal: KSh ${total.toLocaleString()}`;
+            if (currentLocation) {
+                message += `%0ADelivery to: ${currentLocation}`;
+            }
+            message += "%0A%0APlease confirm availability.";
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+        }
+
+        // ==========================================
+        // AUTHENTICATION
+        // ==========================================
+        
+        function openAuthModal(mode = 'login') {
+            authMode = mode;
+            document.getElementById('auth-modal').classList.remove('hidden');
+            updateAuthForm();
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+            resetAuthForm();
+        }
+
+        function updateAuthForm() {
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const switchText = document.getElementById('auth-switch-text');
+            const switchBtn = document.getElementById('auth-switch-btn');
+            const signupFields = document.getElementById('signup-fields');
+            const forgotLink = document.getElementById('forgot-password-link');
+            const emailBtn = document.getElementById('email-auth-btn');
+            
+            if (authMode === 'login') {
+                title.textContent = 'Welcome Back';
+                subtitle.textContent = 'Sign in to your account to continue';
+                switchText.textContent = "Don't have an account?";
+                switchBtn.textContent = 'Sign Up';
+                signupFields.classList.add('hidden');
+                forgotLink.classList.remove('hidden');
+                emailBtn.textContent = 'Sign In';
+            } else {
+                title.textContent = 'Create Account';
+                subtitle.textContent = 'Join ShoeMall Kenya for exclusive deals';
+                switchText.textContent = "Already have an account?";
+                switchBtn.textContent = 'Sign In';
+                signupFields.classList.remove('hidden');
+                forgotLink.classList.add('hidden');
+                emailBtn.textContent = 'Sign Up';
+            }
+        }
+
+        function toggleAuthMode() {
+            authMode = authMode === 'login' ? 'signup' : 'login';
+            updateAuthForm();
+        }
+
+        function switchAuthTab(method) {
+            authMethod = method;
+            document.getElementById('tab-email').className = `flex-1 pb-3 text-center font-medium border-b-2 transition-colors ${method === 'email' ? 'border-brand-orange text-brand-orange' : 'border-transparent text-gray-500 hover:text-gray-700'}`;
+            document.getElementById('tab-phone').className = `flex-1 pb-3 text-center font-medium border-b-2 transition-colors ${method === 'phone' ? 'border-brand-orange text-brand-orange' : 'border-transparent text-gray-500 hover:text-gray-700'}`;
+            
+            document.getElementById('email-auth-form').classList.toggle('hidden', method !== 'email');
+            document.getElementById('phone-auth-form').classList.toggle('hidden', method !== 'phone');
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('auth-password');
+            const icon = document.getElementById('password-toggle');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function handleEmailAuth() {
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const name = document.getElementById('auth-name')?.value;
+            
+            if (!email || !password) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (authMode === 'signup' && !name) {
+                showToast('Please enter your full name', 'error');
+                return;
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                currentUser = {
+                    email: email,
+                    name: authMode === 'signup' ? name : email.split('@')[0],
+                    authMethod: 'email'
+                };
+                localStorage.setItem('shoemall_user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateAuthUI();
+                showToast(authMode === 'signup' ? 'Account created successfully!' : 'Welcome back!');
+            }, 800);
+        }
+
+        function handlePhoneAuth() {
+            const phone = document.getElementById('auth-phone').value;
+            
+            if (!phone || phone.length !== 9) {
+                showToast('Please enter a valid 9-digit phone number', 'error');
+                return;
+            }
+            
+            if (!otpSent) {
+                document.getElementById('otp-section').classList.remove('hidden');
+                document.getElementById('phone-auth-btn').textContent = 'Verify OTP';
+                otpSent = true;
+                showToast('OTP sent to +254' + phone);
+                document.querySelector('.otp-input').focus();
+            } else {
+                const otpInputs = document.querySelectorAll('.otp-input');
+                let otp = '';
+                otpInputs.forEach(input => otp += input.value);
+                
+                if (otp.length !== 4) {
+                    showToast('Please enter complete OTP', 'error');
+                    return;
+                }
+                
+                currentUser = {
+                    phone: '+254' + phone,
+                    name: 'User ' + phone,
+                    authMethod: 'phone'
+                };
+                localStorage.setItem('shoemall_user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateAuthUI();
+                showToast('Phone verified successfully!');
+            }
+        }
+
+        function handleOtpInput(input, index) {
+            if (input.value.length === 1) {
+                const inputs = document.querySelectorAll('.otp-input');
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        }
+
+        function handleGoogleAuth() {
+            setTimeout(() => {
+                currentUser = {
+                    email: 'user@gmail.com',
+                    name: 'Google User',
+                    photo: 'https://ui-avatars.com/api/?name=Google+User&background=random',
+                    authMethod: 'google'
+                };
+                localStorage.setItem('shoemall_user', JSON.stringify(currentUser));
+                closeAuthModal();
+                updateAuthUI();
+                showToast('Signed in with Google!');
+            }, 800);
+        }
+
+        function showForgotPassword() {
+            closeAuthModal();
+            document.getElementById('forgot-password-modal').classList.remove('hidden');
+        }
+
+        function closeForgotPassword() {
+            document.getElementById('forgot-password-modal').classList.add('hidden');
+            openAuthModal('login');
+        }
+
+        function handlePasswordReset() {
+            const email = document.getElementById('reset-email').value;
+            if (!email) {
+                showToast('Please enter your email address', 'error');
+                return;
+            }
+            showToast('Password reset link sent to ' + email);
+            closeForgotPassword();
+        }
+
+        function resetAuthForm() {
+            document.getElementById('auth-email').value = '';
+            document.getElementById('auth-password').value = '';
+            document.getElementById('auth-phone').value = '';
+            document.getElementById('auth-name').value = '';
+            document.querySelectorAll('.otp-input').forEach(input => input.value = '');
+            document.getElementById('otp-section').classList.add('hidden');
+            document.getElementById('phone-auth-btn').textContent = 'Send OTP';
+            otpSent = false;
+            authMode = 'login';
+            authMethod = 'email';
+            switchAuthTab('email');
+        }
+
+        function updateAuthUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const userMenu = document.getElementById('user-menu');
+            
+            if (currentUser) {
+                authBtn.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                
+                const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+                document.getElementById('user-initial').textContent = initial;
+                document.getElementById('user-name').textContent = currentUser.name || currentUser.email || currentUser.phone;
+            } else {
+                authBtn.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+            }
+        }
+
+        function toggleUserMenu() {
+            document.getElementById('user-dropdown').classList.toggle('hidden');
+        }
+
+        function logout() {
+            localStorage.removeItem('shoemall_user');
+            currentUser = null;
+            updateAuthUI();
+            document.getElementById('user-dropdown').classList.add('hidden');
+            showToast('Logged out successfully');
+        }
+
+        // ==========================================
+        // LOCATION
+        // ==========================================
+        
+        function openLocationModal() {
+            document.getElementById('location-modal').classList.remove('hidden');
+        }
+
+        function closeLocationModal() {
+            document.getElementById('location-modal').classList.add('hidden');
+        }
+
+        function renderLocations() {
+            const list = document.getElementById('location-list');
+            list.innerHTML = kenyanLocations.map(loc => `
+                <button onclick="setLocation('${loc}')" class="w-full text-left px-4 py-3 rounded-lg hover:bg-orange-50 hover:text-brand-orange transition-colors flex items-center justify-between group ${loc.includes('RNG Plaza') ? 'bg-orange-50 border border-orange-200' : ''}">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt ${currentLocation === loc ? 'text-brand-orange' : 'text-gray-400'} group-hover:text-brand-orange"></i>
+                        ${loc}
+                        ${loc.includes('RNG Plaza') ? '<span class="text-xs bg-brand-orange text-white px-2 py-0.5 rounded">Store</span>' : ''}
+                    </span>
+                    ${currentLocation === loc ? '<i class="fas fa-check text-brand-orange"></i>' : ''}
+                </button>
+            `).join('');
+        }
+
+        function filterLocations() {
+            const search = document.getElementById('location-search').value.toLowerCase();
+            const filtered = kenyanLocations.filter(loc => loc.toLowerCase().includes(search));
+            const list = document.getElementById('location-list');
+            
+            list.innerHTML = filtered.map(loc => `
+                <button onclick="setLocation('${loc}')" class="w-full text-left px-4 py-3 rounded-lg hover:bg-orange-50 hover:text-brand-orange transition-colors flex items-center justify-between group ${loc.includes('RNG Plaza') ? 'bg-orange-50 border border-orange-200' : ''}">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt ${currentLocation === loc ? 'text-brand-orange' : 'text-gray-400'} group-hover:text-brand-orange"></i>
+                        ${loc}
+                        ${loc.includes('RNG Plaza') ? '<span class="text-xs bg-brand-orange text-white px-2 py-0.5 rounded">Store</span>' : ''}
+                    </span>
+                    ${currentLocation === loc ? '<i class="fas fa-check text-brand-orange"></i>' : ''}
+                </button>
+            `).join('');
+        }
+
+        function setLocation(location) {
+            currentLocation = location;
+            localStorage.setItem('deliveryLocation', location);
+            document.getElementById('current-location').textContent = location;
+            
+            if (cart.length > 0) {
+                updateCartUI();
+            }
+            
+            renderLocations();
+            closeLocationModal();
+            showToast(`Delivery location set to ${location}`);
+        }
+
+        // ==========================================
+        // WHATSAPP
+        // ==========================================
+        
+        function toggleWhatsApp() {
+            document.getElementById('whatsapp-panel').classList.toggle('active');
+        }
+
+        // ==========================================
+        // UTILITIES
+        // ==========================================
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const icon = toast.querySelector('i');
+            
+            toastMessage.textContent = message;
+            
+            if (type === 'error') {
+                toast.className = 'fixed bottom-4 right-24 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 z-50 flex items-center gap-3 max-w-sm';
+                icon.className = 'fas fa-exclamation-circle text-white text-xl';
+            } else {
+                toast.className = 'fixed bottom-4 right-24 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 z-50 flex items-center gap-3 max-w-sm';
+                icon.className = 'fas fa-check-circle text-brand-accent text-xl';
+            }
+            
+            // Show toast
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+            });
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const content = document.getElementById('mobile-menu-content');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => content.classList.remove('-translate-x-full'), 10);
+            } else {
+                content.classList.add('-translate-x-full');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+
+        function loadMore() {
+            showToast('Loading more products...');
+            setTimeout(() => {
+                showToast('All products loaded!');
+            }, 1000);
+        }
+
+        // ==========================================
+        // EVENT LISTENERS
+        // ==========================================
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeQuickView();
+                closeLocationModal();
+                closeAuthModal();
+                closeForgotPassword();
+                closeMpesaModal();
+                closePaymentSuccess();
+                const cartSidebar = document.getElementById('cart-sidebar');
+                if (!cartSidebar.classList.contains('hidden')) {
+                    toggleCart();
+                }
+                document.getElementById('whatsapp-panel').classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('whatsapp-panel');
+            const floatBtn = document.querySelector('.whatsapp-float');
+            if (!panel.contains(e.target) && !floatBtn.contains(e.target)) {
+                panel.classList.remove('active');
+            }
+            
+            const userMenu = document.getElementById('user-menu');
+            const dropdown = document.getElementById('user-dropdown');
+            if (userMenu && !userMenu.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
